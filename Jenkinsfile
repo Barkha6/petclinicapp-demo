@@ -5,7 +5,7 @@ pipeline {
         registryCredential = 'ecr:ap-south-1:awscreds'
         appRegistry = '485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo'
         awsRegistry = "https://485490367164.dkr.ecr.ap-south-1.amazonaws.com"
-        cluster = "Stagging-Environment"
+        cluster = "demo"
         service = "demo-app"
     }
 
