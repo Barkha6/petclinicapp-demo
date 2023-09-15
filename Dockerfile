@@ -1,7 +1,7 @@
 FROM openjdk:8 AS BUILD_IMAGE
 RUN apt update && apt install maven -y
 RUN git clone -b main https://github.com/Barkha6/petclinicapp-demo.git
-RUN cd vprofile-repo && mvn install
+RUN cd petclinicapp-demo && mvn install
 
 FROM tomcat:8-jre11
 
