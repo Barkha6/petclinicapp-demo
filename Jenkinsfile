@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        registryCredential = 'ecr:ap-south-1:Test-User'
+        registryCredential = 'awsecrdemo'
         appRegistry = '485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo'
         awsRegistry = "https://485490367164.dkr.ecr.ap-south-1.amazonaws.com"
         cluster = "demo"
