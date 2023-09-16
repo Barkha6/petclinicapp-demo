@@ -31,7 +31,6 @@ pipeline {
               }
             }
           }
-        }
         stage('Deploy to ECS') {
             steps {
                 withAWS(credentials: 'awscreds', region: 'ap-south-1') {
