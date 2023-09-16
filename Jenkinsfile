@@ -27,7 +27,6 @@ pipeline {
         stage('Upload App Image') {
           steps{
             script {
-              sh 'docker tag demo:latest 485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo:latest'
               sh 'docker push 485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo:latest'
               }
             }
