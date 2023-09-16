@@ -28,13 +28,11 @@ pipeline {
        stage('Upload App Image') {
           steps{
             script {
-              docker.withRegistry( awsRegistry, registryCredential ) {
                 dockerImage.push("$BUILD_NUMBER")
                 dockerImage.push('latest')
               }
             }
           }
-        }
         stage('Deploy to ECS') {
             steps {
                 withAWS(credentials: 'awscreds', region: 'ap-south-1') {
