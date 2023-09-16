@@ -27,8 +27,10 @@ pipeline {
         stage('Upload App Image') {
           steps{
             script {
-              sh 'docker push 485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo:32'
-              }
+              docker.withRegistry( '', registryCredential ) {
+              dockerImage.push()
+          }
+        }
             }
           }
         stage('Deploy to ECS') {
