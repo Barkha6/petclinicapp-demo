@@ -19,7 +19,7 @@ pipeline {
         stage('Build App Image') {
             steps {
                 script {
-                   sh 'docker build -t demo'
+                   sh 'docker build -t demo:latest'
                 }
             }
         }
