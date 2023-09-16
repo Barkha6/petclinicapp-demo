@@ -2,34 +2,31 @@ pipeline {
     agent any
     
     environment {
+        registryCredential = 'ecr:apsouth-1:demo'
         appRegistry = '485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo'
         awsRegistry = "https://485490367164.dkr.ecr.ap-south-1.amazonaws.com"
         cluster = "demo"
-        service = "demo-app"
+        service = "demo-service"
     }
 
     stages {
-        stage('ECR login') {
-            steps {
-                script {
-                    sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 485490367164.dkr.ecr.ap-south-1.amazonaws.com'
-                }
-            }
-        }
         stage('Build App Image') {
             steps {
                 script {
-                   sh 'docker push 485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo:35'
+                    dockerImage = docker.build( appRegistry + ":$BUILD_NUMBER", "./")
                 }
             }
         }
-        
-        stage('Upload App Image') {
+
+       stage('Upload App Image') {
           steps{
             script {
-              sh 'docker push 485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo:34'
+              docker.withRegistry( awsRegistry, registryCredential ) {
+                dockerImage.push("$BUILD_NUMBER")
+                dockerImage.push('latest')
+              }
+            }
           }
-        }
         }
         stage('Deploy to ECS') {
             steps {
