@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        registryCredential = 'ecr:ap-south-1:iam_role'
+        registryCredential = 'ecr:ap-south-1:demo'
         appRegistry = '485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo'
         awsRegistry = "https://485490367164.dkr.ecr.ap-south-1.amazonaws.com"
         cluster = "demo"
@@ -28,7 +28,7 @@ pipeline {
             }
           }
         }
-        stage('Deploy to ECS staging') {
+        stage('Deploy to ECS') {
             steps {
                 withAWS(credentials: 'awscreds', region: 'ap-south-1') {
                     sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
