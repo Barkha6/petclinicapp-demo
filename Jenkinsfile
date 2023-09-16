@@ -19,7 +19,7 @@ pipeline {
         stage('Build App Image') {
             steps {
                 script {
-                   sh 'docker build -t demo:latest'
+                   dockerImage = docker.build( appRegistry + ":$BUILD_NUMBER", "./Dockerfiles/App/")
                 }
             }
         }
