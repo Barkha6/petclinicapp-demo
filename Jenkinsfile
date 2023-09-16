@@ -27,8 +27,7 @@ pipeline {
         stage('Upload App Image') {
           steps{
             script {
-              docker.withRegistry( '', registryCredential ) {
-              dockerImage.push()
+              sh 'docker push 485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo:34'
           }
         }
             }
