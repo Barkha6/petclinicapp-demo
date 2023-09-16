@@ -19,7 +19,7 @@ pipeline {
         stage('Build App Image') {
             steps {
                 script {
-                   dockerImage = docker.build( appRegistry + ":$BUILD_NUMBER", "./")
+                   sh 'docker push 485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo:35'
                 }
             }
         }
@@ -30,8 +30,7 @@ pipeline {
               sh 'docker push 485490367164.dkr.ecr.ap-south-1.amazonaws.com/demo:34'
           }
         }
-            }
-          }
+        }
         stage('Deploy to ECS') {
             steps {
                 withAWS(credentials: 'awscreds', region: 'ap-south-1') {
